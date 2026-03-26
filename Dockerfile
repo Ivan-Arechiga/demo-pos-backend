@@ -4,7 +4,7 @@ WORKDIR /app
 COPY build.gradle.kts settings.gradle.kts ./
 COPY gradle ./gradle
 COPY src ./src
-RUN gradle clean build -x test --no-daemon -q
+RUN gradle clean build --no-daemon -q
 
 # Runtime stage
 FROM eclipse-temurin:17-jre-alpine
