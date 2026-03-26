@@ -1,30 +1,19 @@
 services:
   - type: web
     name: demo-pos-backend
-    runtime: java
+    runtime: docker
     plan: free
     
-    # Build configuration
-    buildCommand: ./gradlew clean build --no-daemon -x test
-    
-    # Start command - runs the compiled JAR
-    startCommand: java -jar build/libs/demo-pos-backend-1.0.0.jar
-    
-    # Environment
+    # Environment variables
     envVars:
       - key: PORT
         value: "8080"
       - key: SPRING_PROFILES_ACTIVE
         value: default
     
-    # Health check
+    # Health check endpoint
     healthCheckPath: /swagger-ui.html
+    healthCheckTimeout: 30
     
-    # Disk
-    disk:
-      name: pos-data
-      mountPath: /app/data
-      sizeGB: 1
-    
-    # Limits for free tier
-    numInstances: 1
+    # Auto-deploy on push to main
+    autoDeploy: true

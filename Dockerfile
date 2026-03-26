@@ -13,11 +13,9 @@ WORKDIR /app
 # Copy the built JAR from builder stage
 COPY --from=builder /app/build/libs/demo-pos-backend-*.jar app.jar
 
-# Expose port (Render will override this with PORT env var)
-EXPOSE 8080
-
-# Set environment
+# Default port (Render will override via PORT environment variable)
+ENV PORT=8080
 ENV SPRING_PROFILES_ACTIVE=default
 
-# Run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Run the application - Spring Boot reads PORT env var automatically
+ENTRYPOINT ["sh", "-c", "java -jar app.jar"]
