@@ -28,7 +28,10 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind")
     
     // Database
-    implementation("com.h2database:h2:2.2.224")
+    runtimeOnly("org.postgresql:postgresql:42.7.3")
+    
+    // H2 for testing (optional, remove if not needed)
+    testRuntimeOnly("com.h2database:h2:2.2.224")
     
     // Logging
     implementation("org.springframework.boot:spring-boot-starter-logging")
