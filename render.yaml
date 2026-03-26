@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: demo-pos-backend
+    runtime: java
+    plan: free
+    
+    # Build configuration
+    buildCommand: ./gradlew clean build --no-daemon -x test
+    
+    # Start command - runs the compiled JAR
+    startCommand: java -jar build/libs/demo-pos-backend-1.0.0.jar
+    
+    # Environment
+    envVars:
+      - key: PORT
+        value: "8080"
+      - key: SPRING_PROFILES_ACTIVE
+        value: default
+    
+    # Health check
+    healthCheckPath: /swagger-ui.html
+    
+    # Disk
+    disk:
+      name: pos-data
+      mountPath: /app/data
+      sizeGB: 1
+    
+    # Limits for free tier
+    numInstances: 1
