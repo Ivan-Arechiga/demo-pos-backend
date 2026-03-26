@@ -11,9 +11,5 @@ services:
       - key: SPRING_PROFILES_ACTIVE
         value: default
     
-    # Health check endpoint
-    healthCheckPath: /swagger-ui.html
-    healthCheckTimeout: 30
-    
     # Auto-deploy on push to main
     autoDeploy: true
